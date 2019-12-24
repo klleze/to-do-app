@@ -1,47 +1,34 @@
+function onReady() {
+  const ADD_TODO_FORM = document.getElementById('addToDoForm');
+  const toDos = [];
+  function renderTheUI() {
+    const TODO_LIST = document.getElementById('toDoList');
+    TODO_LIST.textContent = '';
+    toDos.forEach(function(toDo){
+      const NEW_LI = document.createElement('li');
+      const CHECKBOX = document.createElement('input');
+      CHECKBOX.type = "checkbox";
+      NEW_LI.textContent = toDo.title;
+      TODO_LIST.appendChild(NEW_LI);
+      NEW_LI.appendChild(CHECKBOX);
+    });
+  }
+  function createNewToDo() {
+    const NEW_TODO_TEXT = document.getElementById('newToDoText');
+    if (!NEW_TODO_TEXT.value) { return; }
+    toDos.push({
+      title: NEW_TODO_TEXT.value,
+      complete: false
+    });
+    NEW_TODO_TEXT.value = '';
+    renderTheUI();
+  }
+  ADD_TODO_FORM.addEventListener('submit', event => {
+    event.preventDefault();
+    createNewToDo();
+  });
+  renderTheUI();
+}
 window.onload = function() {
-  alert("The window has loaded!");
   onReady();
 };
-
-function onReady() {
-  const addToDoForm = document.getElementById('addToDoForm');
-  const newToDoText = document.getElementById('newToDoText');
-  const toDoList = document.getElementById('toDoList');
-addToDoForm.addEventListener('submit', event() => {
-  event.preventDefault();
-
-  // get the text
-  let title = newToDoText.value;
-
-  // create a new li
-  let newLi = document.createElement('li');
-
-  //create a new input
-  let checkbox = document.createElement('input');
-
-  //set the input's type to checkbox
-  checkbox.type = "checkbox";
-
-  //set the title
-  newLi.textContent = title;
-
-  //attach the checkbox to the li
-  newLi.appendChild(checkbox);
-
-  //attach the li to the ul
-  toDoList.appendChild(newLi);
-
-  //empty the input
-  newToDoText.value = '';
-
-  var spanDelete = document.createElement("span");
-    spanDelete.setAttribute("id", todoItem.id);
-    spanDelete.setAttribute("class", "delete");
-    spanDelete.onclick = deleteItem;
-    li.appendChild(spanDelete);
-
-  function deleteItem(e) {
-    var id = e.target.id;
-    console.log("delete an item: " + id);
-});
-}
